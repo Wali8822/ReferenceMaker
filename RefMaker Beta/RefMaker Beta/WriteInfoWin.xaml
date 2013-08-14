@@ -1,0 +1,88 @@
+﻿<Window x:Class="RefMaker_Beta.WriteInfoWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WriteInfoWin" Height="135" Width="474" Icon="/RefMaker%20Beta;component/1351673883_chat.ico" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="buttonTemplate3" TargetType="Button">
+            <!--修改模板属性-->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--控件模板-->
+                    <ControlTemplate TargetType="Button">
+                        <!--只有Grid才能装下这么多Child-->
+                        <Grid>
+                            <!--带特效的底层背景-->
+                            <Border x:Name="back" Opacity="0.8" CornerRadius="2">
+                                <Border.BitmapEffect>
+                                    <OuterGlowBitmapEffect Opacity="0.8" GlowSize="0" GlowColor="Red" />
+                                </Border.BitmapEffect>
+                                <Ellipse Width="34" Height="34" Fill="Purple">
+
+                                </Ellipse>
+                                <!--按钮呈圆形-->
+                            </Border>
+                            <Ellipse x:Name="outerCircle" Width="35" Height="35">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="#FF3D5F09"/>
+                                        <GradientStop Offset="1" Color="Azure"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Ellipse Width="28" Height="28">
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Offset="0" Color="White"/>
+                                        <GradientStop Offset="1" Color="Transparent"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <!--按钮内容-->
+                            <Border>
+                                <TextBlock x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}">
+                                </TextBlock>
+                            </Border>
+                        </Grid>
+                        <!--触发器-->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation To="10" Duration="0:0:0.2" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+                                            <ColorAnimation To="#4FFF" BeginTime="0:0:0.2" Duration="0:0:0.2" Storyboard.TargetName="outerCircle" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+                                            <ColorAnimation To="#3FFF" BeginTime="0:0:0.2" Duration="0:0:0.2" Storyboard.TargetName="outerCircle" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="back" Storyboard.TargetProperty="(Border.BitmapEffect).(OuterGlowBitmapEffect.GlowSize)" />
+                                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="outerCircle" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)" />
+                                            <ColorAnimation Duration="0:0:0.2" Storyboard.TargetName="outerCircle" Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX=".9" ScaleY=".9"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="RenderTransformOrigin" Value=".5,.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid Width="457">
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="51,15,0,0" Name="textBox1" VerticalAlignment="Top" Width="394" />
+        <Button Content="OK" Height="44" HorizontalAlignment="Left" Margin="184,45,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" Style="{StaticResource buttonTemplate3}" />
+        <Label Content="TITLE:" Height="28" HorizontalAlignment="Left" Margin="7,11,0,0" Name="label1" VerticalAlignment="Top" />
+    </Grid>
+</Window>
